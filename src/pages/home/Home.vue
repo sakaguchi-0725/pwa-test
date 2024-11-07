@@ -10,8 +10,32 @@ onMounted(() => {
 
 const router = useRouter()
 
-const toAboutPage = () => {
-  router.push("/")
+const startX = ref(0)
+const isSwipedLeft = ref(false)
+const isSwipedRight = ref(false)
+const SWIPE_THRESHOLD = 100
+
+const onTouchStart = (event: TouchEvent) => {
+  startX.value = event.touches[0].clientX;
+  isSwipedLeft.value = false;
+  isSwipedRight.value = false;
+}
+
+const onTouchEnd = (event: TouchEvent) => {
+  const endX = event.changedTouches[0].clientX
+  const diffX = endX - startX.value
+
+  if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+    if (diffX > 0) {
+      isSwipedRight.value = true; // 右方向にスワイプ
+      console.log('Right swipe detected');
+
+    } else {
+      isSwipedLeft.value = true; // 左方向にスワイプ
+      console.log('Left swipe detected')
+      router.push('/about')
+    }
+  }
 }
 </script>
 
@@ -22,7 +46,7 @@ const toAboutPage = () => {
     <span v-else>ブラウザとして閲覧しています。</span>
   </div>
   
-  <div v-touch:swipe="toAboutPage" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
+  <div @touchstart="onTouchStart" @touchend="onTouchEnd" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
     スワイプするとAboutPageに遷移します
   </div>
 </template>
