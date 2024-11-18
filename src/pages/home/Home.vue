@@ -37,6 +37,16 @@ const handleClickInstall = async () => {
     ready.value = false; // ボタンを無効にする
   }
 };
+
+const onClickVibration = () => {
+  if (navigator.vibrate) {
+    // 200ms振動 → 100ms停止
+    navigator.vibrate([200, 100, 200, 100, 200])
+    console.log('バイブレーションを実行します')
+  } else {
+    console.log('バイブレーションはサポートされていません')
+  }
+}
 </script>
 
 <template>
@@ -52,5 +62,9 @@ const handleClickInstall = async () => {
 
   <button v-if="!isPWA" @click="handleClickInstall">
     PWAインストール
+  </button>
+
+  <button type="button" @click="onClickVibration">
+    バイブレーション検討ボタン
   </button>
 </template>
