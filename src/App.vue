@@ -12,7 +12,7 @@ const { needRefresh, updateServiceWorker } = useRegisterSW({
 </script>
 
 <template>
-  <h1>PWA Test APP</h1>
+  <h1>PWA APP</h1>
   <p v-if="needRefresh">リロードが必要です</p>
   <button v-if="needRefresh"  @click="updateServiceWorker()">リロードする</button>
   <div>
