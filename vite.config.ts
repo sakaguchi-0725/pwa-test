@@ -14,7 +14,8 @@ export default defineConfig({
         short_name: "PWA App",
         description: "PWA Test App",
         lang: "ja",
-        display: "standalone"
+        display: "standalone",
+        start_url: '/about'
       }
     })
   ],
