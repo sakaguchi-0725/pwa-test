@@ -24,8 +24,13 @@ export const swipeHandler = ({ onLeftSwipe, onRightSwipe }: SwipeHandlerParams) 
     }
   }
 
+  const onTouchMove = (event: TouchEvent) => {
+    event.preventDefault()
+  }
+
   return {
     onTouchStart,
     onTouchEnd,
+    onTouchMove,
   }
 }

@@ -11,7 +11,7 @@ onMounted(() => {
 
 const router = useRouter()
 
-const { onTouchStart, onTouchEnd } = swipeHandler({ onRightSwipe: () => router.push('/') })
+const { onTouchStart, onTouchEnd, onTouchMove } = swipeHandler({ onRightSwipe: () => router.push('/') })
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const { onTouchStart, onTouchEnd } = swipeHandler({ onRightSwipe: () => router.p
     <span v-else>ブラウザとして閲覧しています。</span>
   </div>
   
-  <div @touchstart="onTouchStart" @touchend="onTouchEnd" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
+  <div @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
     スワイプするとHomePageに遷移します
   </div>
 </template>

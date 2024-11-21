@@ -11,7 +11,7 @@ onMounted(() => {
 
 const router = useRouter()
 
-const { onTouchStart, onTouchEnd } = swipeHandler({ onLeftSwipe: () => router.push('/about') })
+const { onTouchStart, onTouchEnd, onTouchMove } = swipeHandler({ onLeftSwipe: () => router.push('/about') })
 
 const deferredPrompt = ref<Event | null>(null);
 const ready = ref(false);
@@ -50,13 +50,13 @@ const onClickVibration = () => {
 </script>
 
 <template>
-  <h1>Home Page</h1>
+  <h1>Home Page Edited</h1>
   <div style="margin-top: 10px; margin-bottom: 10px;">
     <span v-if="isPWA">PWAとして閲覧しています。</span>
     <span v-else>ブラウザとして閲覧しています。</span>
   </div>
   
-  <div @touchstart="onTouchStart" @touchend="onTouchEnd" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
+  <div @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd" style="height: 80px; width: full; padding: 20px 0 20px 0; background-color: whitesmoke;">
     スワイプするとAboutPageに遷移します
   </div>
 
