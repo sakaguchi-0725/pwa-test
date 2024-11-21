@@ -53,7 +53,7 @@ const { needRefresh } = useRegisterSW()
 </script>
 
 <template>
-  <h1>Home Page Edit</h1>
+  <h1>Home Page</h1>
   <p v-if="needRefresh">リロードが必要です</p>
   <div style="margin-top: 10px; margin-bottom: 10px;">
     <span v-if="isPWA">PWAとして閲覧しています。</span>
