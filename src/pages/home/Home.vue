@@ -3,6 +3,7 @@ import { onMounted, onUnmounted, ref } from 'vue';
 import { checkPWA } from '../../shared/pwa';
 import { useRouter } from 'vue-router';
 import { swipeHandler } from '../../shared/lib/swipeHandler';
+import { useRegisterSW } from 'virtual:pwa-register/vue';
 
 const isPWA = ref(false)
 onMounted(() => {
@@ -47,10 +48,13 @@ const onClickVibration = () => {
     console.log('バイブレーションはサポートされていません')
   }
 }
+
+const { needRefresh } = useRegisterSW()
 </script>
 
 <template>
   <h1>Home Page Edit</h1>
+  <p v-if="needRefresh">リロードが必要です</p>
   <div style="margin-top: 10px; margin-bottom: 10px;">
     <span v-if="isPWA">PWAとして閲覧しています。</span>
     <span v-else>ブラウザとして閲覧しています。</span>
