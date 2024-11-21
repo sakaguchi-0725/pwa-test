@@ -1,26 +1,20 @@
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue';
-import { onMounted } from 'vue';
 import { RouterView } from 'vue-router'
 
-onMounted(() => {
-  const { updateServiceWorker } = useRegisterSW({
-    onRegistered(r) {
-      if (r) {
-        r.update()
-      }
-    },
-    onNeedRefresh() {
-      alert('新しいバージョンがリリースされました。\n画面をリロードします')
-      window.location.reload()
-    }
-  })
-  updateServiceWorker()
+const { needRefresh, updateServiceWorker } = useRegisterSW({
+  onNeedRefresh() {
+    alert('リロードします')
+    window.location.reload()
+  }
 })
+
 </script>
 
 <template>
   <h1>PWA Test APP</h1>
+  <p v-if="needRefresh">リロードが必要です</p>
+  <button v-if="needRefresh"  @click="updateServiceWorker()">リロードする</button>
   <div>
     <RouterView />
   </div>
